@@ -15,20 +15,20 @@ repos:
       - id: check-case-conflict
       - id: detect-private-key
       - id: debug-statements
-        
+
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.12.7
     hooks:
       - id: ruff
         args: [--fix]
       - id: ruff-format
-        
+
   - repo: https://github.com/astral-sh/uv-pre-commit
     rev: 0.8.4
     hooks:
       - id: uv-lock
       - id: uv-export
-      
+
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v1.16.1
     hooks:
@@ -36,10 +36,8 @@ repos:
         name: "mypy"
         entry: uv run mypy
         exclude: ^tests/
-        
+
   - repo: https://github.com/kynan/nbstripout
     rev: 0.8.1
     hooks:
       - id: nbstripout
-      
-
