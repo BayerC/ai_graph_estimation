@@ -1,0 +1,13 @@
+[project]
+name = "ai-graph-estimation"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastai>=2.8.4",
+    "ipykernel>=6.30.1",
+    "jupyter>=1.1.1",
+    "matplotlib>=3.10.6",
+    "pre-commit>=4.3.0",
+]
