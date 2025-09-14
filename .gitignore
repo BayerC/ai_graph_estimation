@@ -1,5 +1,6 @@
 # Model
 *.pth
+*.pkl
 
 # Image
 *.png
