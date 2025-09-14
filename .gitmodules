@@ -1,0 +1,3 @@
+[submodule "src/deployment"]
+	path = src/deployment
+	url = https://huggingface.co/spaces/Noxem/ai_graph_estimation
