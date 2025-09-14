@@ -3,7 +3,7 @@ name: Sync Deployment to Hugging Face
 on:
   push:
     paths:
-      - 'deployment/**'
+      - 'src/deployment/**'
 
 jobs:
   deploy:
@@ -22,8 +22,14 @@ jobs:
 
       - name: Push to Hugging Face
         run: |
-          cd deployment
-          git remote set-url origin https://user:$HF_TOKEN@huggingface.co/spaces/Noxem/ai_graph_estimation
+          # Clone the Hugging Face repo
+          git clone https://user:$HF_TOKEN@huggingface.co/spaces/Noxem/ai_graph_estimation hf_repo
+
+          # Copy deployment files to HF repo
+          cp -r src/deployment/* hf_repo/
+
+          # Push changes to Hugging Face
+          cd hf_repo
           git add .
           git commit -m "Sync deployment from GitHub" || echo "No changes to commit"
           git push origin main
