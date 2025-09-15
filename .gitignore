@@ -5,6 +5,9 @@
 # Image
 *.png
 
+# Deployment exceptions - allow specific files needed for deployment
+!src/deployment/examples/*.png
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
