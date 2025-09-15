@@ -1,34 +1,33 @@
-name: Sync Deployment to Hugging Face
+name: CI and deployment
 
 on:
   push:
-    paths:
-      - 'src/deployment/**'
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
-  deploy:
+  pre-commit:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout main repo
-        uses: actions/checkout@v3
-        with:
-          submodules: recursive
-          fetch-depth: 0
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v4
+      - run: uv python install
+      - run: uv sync --all-groups
+      - run: uv run pre-commit run --all-files
 
-      - name: Setup Git
+  deploy:
+    needs: pre-commit
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && contains(github.event.head_commit.modified, 'src/deployment/')
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy to Hugging Face
         run: |
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "GitHub Actions"
-
-      - name: Push to Hugging Face
-        run: |
-          # Clone the Hugging Face repo
           git clone https://user:$HF_TOKEN@huggingface.co/spaces/Noxem/ai_graph_estimation hf_repo
-
-          # Copy deployment files to HF repo
           cp -r src/deployment/* hf_repo/
-
-          # Push changes to Hugging Face
           cd hf_repo
           git add .
           git commit -m "Sync deployment from GitHub" || echo "No changes to commit"
