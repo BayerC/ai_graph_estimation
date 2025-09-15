@@ -19,3 +19,10 @@ This is a machine learning application that estimates graph types from images us
 ## Usage
 
 Simply upload an image of a graph and the model will predict what type of graph it is.
+
+## Examples
+
+The `examples/` directory contains sample images demonstrating different graph types:
+- `linear.png` - Linear function example
+- `quadratic.png` - Quadratic function example
+- `cubic.png` - Cubic function example
