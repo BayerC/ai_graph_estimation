@@ -1,3 +1,4 @@
+---
 title: Ai Graph Estimation
 emoji: 🌍
 colorFrom: red
@@ -9,3 +10,12 @@ python_version: 3.11.0
 pinned: false
 license: apache-2.0
 short_description: https://github.com/BayerC/ai_graph_estimation
+---
+
+# Ai Graph Estimation
+
+This is a machine learning application that estimates graph types from images using a trained FastAI model. The model can classify different types of mathematical graphs (linear, quadratic, cubic, etc.) from uploaded images.
+
+## Usage
+
+Simply upload an image of a graph and the model will predict what type of graph it is.
