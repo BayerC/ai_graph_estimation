@@ -9,10 +9,11 @@ x = np.linspace(-5, 5, 400)
 y = 2 * x**2 + 2
 
 # where we store clicked points (in data coords)
-points_x, points_y = [], []
+points_x: list[float] = []
+points_y: list[float] = []
 
 # fixed figure settings (important for stable pixel <-> data mapping)
-FIGSIZE = (6, 4)  # inches
+FIGSIZE = (10, 10)  # inches
 DPI = 100  # dots-per-inch -> figure pixels = figsize * dpi
 
 
@@ -79,8 +80,27 @@ def add_point(evt: gr.SelectData):
     return make_plot()
 
 
-with gr.Blocks() as demo:
-    img = gr.Image(value=make_plot(), type="pil", label="Interactive Quadratic Curve")
+with gr.Blocks(
+    css="""
+    .image-container img {
+        pointer-events: auto !important;
+        user-select: none !important;
+        -webkit-user-drag: none !important;
+        -khtml-user-drag: none !important;
+        -moz-user-drag: none !important;
+        -o-user-drag: none !important;
+        user-drag: none !important;
+        draggable: false !important;
+    }
+"""
+) as demo:
+    img = gr.Image(
+        value=make_plot(),
+        type="pil",
+        label="Interactive Quadratic Curve",
+        interactive=False,
+        elem_classes=["image-container"],
+    )
     img.select(add_point, None, img)
 
 if __name__ == "__main__":
